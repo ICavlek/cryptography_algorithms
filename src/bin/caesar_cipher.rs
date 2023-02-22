@@ -1,10 +1,15 @@
 struct CaesarCipher {
     key: i32,
+    upper_case_start: u8,
+    upper_case_end: u8,
+    lower_case_start: u8,
+    lower_case_end: u8,
+    alphabet_length: u8,
 }
 
 impl CaesarCipher {
     fn new(key: i32) -> Self {
-        CaesarCipher { key }
+        CaesarCipher { key, upper_case_start: 65, upper_case_end: 90, lower_case_start: 97, lower_case_end: 122, alphabet_length: 26 }
     }
 
     /// A simple implementation of the Caesar cipher encryption algorithm.
@@ -12,10 +17,10 @@ impl CaesarCipher {
         let mut result = String::new();
         for c in str.chars() {
             let mut c = c as u8;
-            if c >= 65 && c <= 90 {
-                c = (c - 65 + self.key as u8) % 26 + 65;
-            } else if c >= 97 && c <= 122 {
-                c = (c - 97 + self.key as u8) % 26 + 97;
+            if c >= self.upper_case_start && c <= self.upper_case_end {
+                c = (c - self.upper_case_start + self.key as u8) % self.alphabet_length + self.upper_case_start;
+            } else if c >= self.lower_case_start && c <= self.lower_case_end {
+                c = (c - self.lower_case_start + self.key as u8) % self.alphabet_length + self.lower_case_start;
             }
             result.push(c as char);
         }
@@ -27,20 +32,20 @@ impl CaesarCipher {
         let mut result = String::new();
         for c in str.chars() {
             let mut c = c as u8;
-            if c >= 65 && c <= 90 {
-                if (c - 65) <= self.key as u8 {
-                    c = c - 65  + 26 - self.key as u8;
+            if c >= self.upper_case_start && c <= self.upper_case_end {
+                if (c - self.upper_case_start) <= self.key as u8 {
+                    c = c - self.upper_case_start  + self.alphabet_length - self.key as u8;
                 } else {
-                    c = c - 65 - self.key as u8;
+                    c = c - self.upper_case_start - self.key as u8;
                 }
-                c = c % 26 + 65;
-            } else if c >= 97 && c <= 122 {
-                if (c - 97) <= self.key as u8 {
-                    c = c - 97  + 26 - self.key as u8;
+                c = c % self.alphabet_length + self.upper_case_start;
+            } else if c >= self.lower_case_start && c <= self.lower_case_end {
+                if (c - self.lower_case_start) <= self.key as u8 {
+                    c = c - self.lower_case_start  + self.alphabet_length - self.key as u8;
                 } else {
-                    c = c - 97 - self.key as u8;
+                    c = c - self.lower_case_start - self.key as u8;
                 }
-                c = c % 26 + 97;
+                c = c % self.alphabet_length + self.lower_case_start;
             }
             result.push(c as char);
         }
