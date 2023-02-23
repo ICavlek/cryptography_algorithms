@@ -1,4 +1,5 @@
-struct CaesarCipher {
+#[derive(Debug)]
+pub struct CaesarCipher {
     key: i32,
     upper_case_start: u8,
     upper_case_end: u8,
@@ -8,12 +9,12 @@ struct CaesarCipher {
 }
 
 impl CaesarCipher {
-    fn new(key: i32) -> Self {
+    pub fn new(key: i32) -> Self {
         CaesarCipher { key, upper_case_start: 65, upper_case_end: 90, lower_case_start: 97, lower_case_end: 122, alphabet_length: 26 }
     }
 
     /// A simple implementation of the Caesar cipher encryption algorithm.
-    fn encrypt(&self, str: &str) -> String {
+    pub fn encrypt(&self, str: &str) -> String {
         let mut result = String::new();
         for c in str.chars() {
             let mut c = c as u8;
@@ -28,7 +29,7 @@ impl CaesarCipher {
     }
 
     /// A simple implementation of the Caesar cipher decryption algorithm.
-    fn decrypt(&self, str: &str) -> String {
+    pub fn decrypt(&self, str: &str) -> String {
         let mut result = String::new();
         for c in str.chars() {
             let mut c = c as u8;
@@ -51,14 +52,6 @@ impl CaesarCipher {
         }
         result
     }
-}
-
-fn main() {
-    let plain_text: &str = "XYZ";
-    let caesar_cipher: CaesarCipher = CaesarCipher::new(3);
-    let cipher_text: String = caesar_cipher.encrypt(plain_text);
-    println!("{} -> {}", plain_text, cipher_text);
-    println!("{} -> {}", cipher_text, caesar_cipher.decrypt(&cipher_text));
 }
 
 #[cfg(test)]
