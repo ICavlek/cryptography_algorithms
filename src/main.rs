@@ -16,11 +16,12 @@ fn caesar_cipher_example() {
 
 /// An example of the Vigenere cipher encryption and decryption algorithms.
 fn vigenere_cipher_example() {
-    println!("--- Vigenere Cipher Example (key = secret) ---");
-    let plain_text: &str = "this is just an example";
-    let vigenere_cipher: VigenereCipher = VigenereCipher::new("secret");
+    println!("--- Vigenere Cipher Example (key = SECRET) ---");
+    let plain_text: &str = "THIS IS JUST AN EXAMPLE";
+    let vigenere_cipher: VigenereCipher = VigenereCipher::new("SECRET");
     let cipher_text: String = vigenere_cipher.encrypt(plain_text);
     println!("{} -> {}", plain_text, cipher_text);
+    println!("{} -> {}", cipher_text, vigenere_cipher.decrypt(&cipher_text));
     println!();
 }
 
