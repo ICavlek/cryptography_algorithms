@@ -2,6 +2,7 @@ pub mod symmetric;
 
 use crate::symmetric::caesar_cipher::CaesarCipher;
 use crate::symmetric::vigenere_cipher::VigenereCipher;
+use crate::symmetric::one_time_pad::OneTimePad;
 
 /// An example of the Caesar cipher encryption and decryption algorithms.
 fn caesar_cipher_example() {
@@ -25,7 +26,18 @@ fn vigenere_cipher_example() {
     println!();
 }
 
+fn one_time_pad_example() {
+    println!("--- One Time Pad Example ---");
+    let plain_text: &str = "ABC";
+    let mut one_time_pad: OneTimePad = OneTimePad::new("222");
+    let cipher_text: String = one_time_pad.encrypt(plain_text);
+    println!("{} -> {}", plain_text, cipher_text);
+    println!("{} -> {}", cipher_text, one_time_pad.decrypt(&cipher_text));
+    println!();
+}
+
 fn main() {
     caesar_cipher_example();
-    vigenere_cipher_example()
+    vigenere_cipher_example();
+    one_time_pad_example();
 }
