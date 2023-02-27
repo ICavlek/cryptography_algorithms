@@ -9,6 +9,7 @@ pub struct CaesarCipher {
 }
 
 impl CaesarCipher {
+    /// Create a new CaesarCipher struct.
     pub fn new(key: i32) -> Self {
         CaesarCipher { key, upper_case_start: 65, upper_case_end: 90, lower_case_start: 97, lower_case_end: 122, alphabet_length: 26 }
     }

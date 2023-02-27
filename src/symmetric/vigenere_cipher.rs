@@ -9,10 +9,12 @@ pub struct VigenereCipher {
 }
 
 impl VigenereCipher {
+    /// Create a new VigenereCipher struct.
     pub fn new(key: &str) -> Self {
         VigenereCipher { key: key.to_string(), upper_case_start: 65, upper_case_end: 90, lower_case_start: 97, lower_case_end: 122, alphabet_length: 26 }
     }
 
+    /// A simple implementation of the Vigenere cipher encryption algorithm.
     pub fn encrypt(&self, str: &str) -> String {
         let mut result = String::new();
         let mut key_index = 0;
@@ -30,6 +32,7 @@ impl VigenereCipher {
         result
     }
 
+    /// A simple implementation of the Vigenere cipher decryption algorithm.
     pub fn decrypt(&self, str: &str) -> String {
         let mut result = String::new();
         let mut key_index = 0;
