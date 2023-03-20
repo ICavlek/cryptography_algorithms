@@ -26,9 +26,10 @@ fn vigenere_cipher_example() {
     println!();
 }
 
+/// An example of the One Time Pad encryption and decryption algorithms.
 fn one_time_pad_example() {
     println!("--- One Time Pad Example ---");
-    let plain_text: &str = "ABC";
+    let plain_text: &str = "abc";
     let mut one_time_pad: OneTimePad = OneTimePad::new("222");
     let cipher_text: String = one_time_pad.encrypt(plain_text);
     println!("{} -> {}", plain_text, cipher_text);

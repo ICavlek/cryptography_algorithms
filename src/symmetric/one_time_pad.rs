@@ -26,3 +26,17 @@ impl OneTimePad {
         self.encrypt(str)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_one_time_pad() {
+        let plain_text: &str = "abc";
+        let mut one_time_pad: OneTimePad = OneTimePad::new("222");
+        let cipher_text: String = one_time_pad.encrypt(plain_text);
+        assert_eq!(cipher_text, "SPQ");
+        assert_eq!(one_time_pad.decrypt(cipher_text.as_str()), plain_text);
+    }
+}
